@@ -22,8 +22,8 @@ Do not use .py extensions when tracing a file.
 
 Tasks implemented:
 
-Use AdvancedSymbolicFuzzer instead of SimpleSymbolicFuzzer 
-Certain constraints are untraceble (to the part of the code which generated it)
-Unsatisfiable paths processing (unsat core) 
-5 exaples files
-Report 
+1.Use AdvancedSymbolicFuzzer instead of SimpleSymbolicFuzzer 
+2.Certain constraints are untraceble (to the part of the code which generated it)
+3.Unsatisfiable paths processing (unsat core) 
+4.5 exaples files
+5.Report 
