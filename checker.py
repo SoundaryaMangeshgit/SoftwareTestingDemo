@@ -3,6 +3,14 @@ from inspect import getmembers, isfunction
 import importlib
 import argparse
 
+def find_all(a_str, sub):
+    start = 0
+    while True:
+        start = a_str.find(sub, start)
+        if start == -1: return
+        yield start
+        start += len(sub) # use start += 1 to find overlapping matches
+
 # Initiate the parser
 parser = argparse.ArgumentParser()
 
@@ -44,7 +52,15 @@ for func in getmembers(mymodule, isfunction):
     print("Function:",func[0],". Found total paths: ", len(paths))
 
     for i in range(len(paths)):
+        get_out = str(paths[i].get_path_to_root())
+        positions = list(find_all(get_out, 'line['))
+        lines = ''
+        for k,j in enumerate(positions):
+            if k:
+                lines += ', '
+            lines += get_out[j+5:get_out.find(']',j+5)] # 5 for 'line['
         print("------------------------------")
         print("Path#", i)
         print("Constraints:", asymfz_gcd.extract_constraints(paths[i].get_path_to_root()))
+        print("Located at lines:", lines)
         print("Solution:", asymfz_gcd.solve_path_constraint(paths[i].get_path_to_root()))
